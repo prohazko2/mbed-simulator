@@ -18,20 +18,22 @@ git clone https://github.com/alpsayin/FreeRTOS-Emulator.git
 yay -S sdl2 sdl2_gfx sdl2_image sdl2_mixer sdl2_ttf clang
 
 # mbed-simulator and dependencies
-yay -S python2-pip
-python2 -m pip install mbed-cli
+# yay -S python2-pip
+# python2 -m pip install mbed-cli
 yay -S python-pip
 python3 -m pip install mbed-cli
 yay -S mercurial
-yay -S nvm
-echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
-source /usr/share/nvm/init-nvm.sh
-nvm install --lts
+# yay -S nvm
+# echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
+# source /usr/share/nvm/init-nvm.sh
+# nvm install --lts
 yay -S emsdk
-chown -R cs431:cs431 /usr/lib/emsdk
+sudo chown -R $USER:$USER /usr/lib/emsdk
+sudo emsdk update
+emsdk list --old | grep 1.38.21
 emsdk install sdk-fastcomp-1.38.21-64bit
 emsdk activate sdk-fastcomp-1.38.21-64bit
-echo 'source "/usr/lib/emsdk/emsdk_env.sh"' >> $HOME/.bash_profile
+echo 'source "/usr/lib/emsdk/emsdk_env.sh"' >> $HOME/.bashrc
 source /usr/lib/emsdk/emsdk_env.sh
 
 git clone https://github.com/alpsayin/mbed-simulator.git
@@ -40,4 +42,4 @@ npm install
 npm install . -g
 npm run build-demos
 
-node server.js
+source start_mbed_simulator.bash
