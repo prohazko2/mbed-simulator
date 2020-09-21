@@ -2,9 +2,9 @@
 
 # manjaro xfce doesnt come with below utils
 sudo pacman -S pacaur binutils fakeroot base-devel
-pacaur -Rcs pidgin hexchat gimp xfburn steam-manjaro thunderbird vlc audacious hplip 
 gpg --keyserver pool.sks-keyservers.net --recv-keys F57D4F59BD3DF454
 pacaur -S yay
+yay -Rcs pidgin hexchat gimp xfburn steam-manjaro thunderbird vlc audacious hplip 
 yay -S sublime-text-3 sublime-merge 
 yay -S terminator
 yay -S bleachbit
