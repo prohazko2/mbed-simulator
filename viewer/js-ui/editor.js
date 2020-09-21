@@ -58,13 +58,6 @@ function load_demo(demo) {
             console.error('Failed to load demo...', x.status);
         }
 
-        if (ga && typeof ga === 'function') {
-            ga('send', {
-                hitType: 'event',
-                eventCategory: 'load-demo',
-                eventAction: demo
-            });
-        }
     };
     x.open('GET', '/demos/' + demo + '/main.cpp');
     x.send();
@@ -107,13 +100,6 @@ document.querySelector('#run').onclick = function() {
             simulatorFrame.style.display = 'none';
         }
 
-        if (ga && typeof ga === 'function') {
-            ga('send', {
-                hitType: 'event',
-                eventCategory: 'compile',
-                eventAction: x.status === 200 ? 'success' : 'failure'
-            });
-        }
     };
     x.open('POST', '/compile');
     x.setRequestHeader('Content-Type', 'application/json');
