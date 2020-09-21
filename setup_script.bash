@@ -1,5 +1,8 @@
 #!/bin/bash
 
+## This is confirmed working on a Manjaro/arch linux setup
+## Similar commands can probably be run on an Ubuntu to get a local setup.
+
 # manjaro xfce doesnt come with below utils
 sudo pacman -S pacaur binutils fakeroot base-devel cmake make automake
 pacaur -S yay
