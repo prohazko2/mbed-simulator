@@ -175,6 +175,11 @@ Last, install the simulator. Easiest is through npm:
 
 ### Troubleshooting
 
+**Pointer_stringify Issues**
+This error is thrown when you use too high an emscripten version. According to release notes 1.38.27 version of Emscripten aborts by default when Pointer_stringify is called. I tried 1.38.26 which didn't quite compile. So I decided to use 1.38.21 as per the original docs. Further reading below:
+ - https://github.com/janjongboom/mbed-simulator/issues/44
+ - https://github.com/janjongboom/mbed-simulator/issues/43
+
 **Windows: [Error 87] The parameter is incorrect**
 
 This error is thrown on Windows systems when the path length limit is hit. Move the `mbed-simulator` folder to a folder closer to root (e.g. `C:\mbed-simulator`).
