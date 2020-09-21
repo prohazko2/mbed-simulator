@@ -13,7 +13,7 @@ module.exports = async function(content, outFolder) {
     try {
         await application.buildFile(inputFile, outputFile, [
             '-O2'
-        ], false, false);
+        ], false, true);
     }
     catch (ex) {
         // remove path info
