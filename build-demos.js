@@ -11,6 +11,7 @@ function buildDemo(root_demos_directory, demo_directory) {
         'node',
         [
             'cli.js',
+            '-v',
             '-i',
             `${root_demos_directory}/${demo_directory}`,
             '-o',
