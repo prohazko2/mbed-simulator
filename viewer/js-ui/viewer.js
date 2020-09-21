@@ -16,11 +16,22 @@ var components = [
     { component: 'LedYellow', name: 'Yellow LED', pins: [ 'LED' ] },
     { component: 'LedWhite', name: 'White LED', pins: [ 'LED' ] },
     // { component: 'LedRGB', name: 'RGB LED', pins: [ 'Red', 'Green', 'Blue' ] },
-    // { component: 'PushButton', name: 'Push button', pins: [ 'Button' ] },
+    { component: 'PushButton', name: 'Push button', pins: [ 'Button' ] },
+    { component: 'Switch', name: 'Switch', pins: [ 'Switch' ] },
+    {
+        component: 'Potentiometer',
+        name: 'Analog potentiometer',
+        pins: [ { name: 'Potentiometer', value: [ 'p15', 'p16', 'p17', 'p18', 'p19', 'p20' ] } ]
+    },
     {
         component: 'Thermistor',
         name: 'Analog thermistor',
         pins: [ { name: 'Thermistor', value: [ 'p15', 'p16', 'p17', 'p18', 'p19', 'p20' ] } ]
+    },
+    {
+        component: 'PwmSpeaker',
+        name: 'Pwm Speaker',
+        pins: [ { name: 'Speaker', value: [ 'p21', 'p22', 'p23', 'p24', 'p25', 'p26' ] } ]
     },
     {
         component: 'sht31',

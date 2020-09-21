@@ -10,44 +10,84 @@
     Emulating Mbed OS 5 applications in the browser
     (c) 2017-2018 Arm Ltd. Written by Jan Jongboom.
 
-    Version {{version}}
+    Version 1.9.7
   -->
 </head>
 <body>
   <section id="header">
-    Arm Mbed OS simulator
-
-    <span id="links">
-      <a target="_blank" href="https://github.com/ARMMbed/mbed-simulator#cli">Download offline version</a> |
-      <a target="_blank" href="https://github.com/ARMMbed/mbed-simulator">GitHub project</a>
-    </span>
+    <img class="header-logo" src="/img/headerLogo.png" alt="Mbed OS Simulator">
   </section>
 
   <section id="project">
     <section id="editor-container">
       <div id="editor-topbar">
         <select id="select-project">
-          <option disabled>-- Basic demos --</option>
-          <option selected name="blinky">Blinky</option>
-          <option name="interrupts">Interrupts</option>
-          <option name="events">Events</option>
-          <option name="pwmout">PwmOut</option>
-          <option name="busout">Blinky with BusOut</option>
-          <option name="trace">Tracing</option>
-          <option name="bd">Block Device</option>
-          <option disabled>-- Peripherals --</option>
-          <option name="lcd">LCD Display</option>
-          <option name="touchscreen">Touch screen</option>
-          <option name="temperature">Temperature / humidity</option>
-          <option disabled>-- Networking --</option>
-          <option name="tcpsocket">TCP Socket</option>
-          <option name="tlssocket">TLS Socket</option>
-          <option name="http">HTTP</option>
-          <option name="https">HTTPS</option>
-          <option name="coap">CoAP</option>
-          <option name="ntp">Time over UDP</option>
-          <option name="lorawan">LoRaWAN</option>
-          <option name="lorawan-abp">LoRaWAN (ABP)</option>
+            <option name="bd" >
+              Block Device
+            </option>
+            <option name="blinky" selected="selected">
+              Blinky
+            </option>
+            <option name="busout" >
+              Blinky with BusOut
+            </option>
+            <option name="coap" >
+              CoAP
+            </option>
+            <option name="events" >
+              Events
+            </option>
+            <option name="http" >
+              HTTP
+            </option>
+            <option name="https" >
+              HTTPS
+            </option>
+            <option name="hastebin" >
+              Hastebin HTTPS
+            </option>
+            <option name="interrupts" >
+              Interrupts
+            </option>
+            <option name="lcd" >
+              LCD Display
+            </option>
+            <option name="lorawan" >
+              LoRaWAN
+            </option>
+            <option name="lorawan-abp" >
+              LoRaWan (ABP)
+            </option>
+            <option name="ntp" >
+              Time over UDP
+            </option>
+            <option name="peliondm" >
+              Pelion Device Management
+            </option>
+            <option name="pwm-speaker" >
+              Pwm Speaker
+            </option>
+            <option name="pwmout" >
+              PwmOut
+            </option>
+            <option name="tcpsocket" >
+              TCP Socket
+            </option>
+            <option name="tcpsocket-async" >
+              TCP Socket (Async)
+            </option>
+            <option name="temperature" >
+              Temperature / humidity
+            </option>
+            <option name="tlssocket" >
+              TLS Socket
+            </option>
+            <option name="touchscreen" >
+              Touchscreen
+            </option>
+            <option name="trace" >
+              Trace
+            </option>
         </select>
         <button id="load-demo">Load demo</button>
 
