@@ -89,6 +89,10 @@
 
         var oscillator = audioCtx.createOscillator();
         oscillator.type = 'square';
+        console.log('what is then the frequency?', this.frequency);
+        if(isNaN(this.frequency)){
+            this.frequency = 1; // why not, anything is better than NaN
+        }
         oscillator.frequency.setValueAtTime(
             this.frequency, audioCtx.currentTime
         );
