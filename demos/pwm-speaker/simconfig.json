@@ -1,0 +1,5 @@
+{
+    "peripherals": [
+        { "component": "PwmSpeaker", "args": { "Speaker" : "PinNames.p21" } }
+    ]
+}
