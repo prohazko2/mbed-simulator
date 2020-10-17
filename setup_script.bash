@@ -26,10 +26,10 @@ yay -S sdl2 sdl2_gfx sdl2_image sdl2_mixer sdl2_ttf clang
 yay -S python-pip
 python3 -m pip install mbed-cli
 yay -S mercurial
-# yay -S nvm
-# echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
-# source /usr/share/nvm/init-nvm.sh
-# nvm install --lts
+yay -S nvm
+echo 'source /usr/share/nvm/init-nvm.sh' >> ~/.bashrc
+source /usr/share/nvm/init-nvm.sh
+nvm install --lts
 yay -S emsdk
 sudo chown -R $USER:$USER /usr/lib/emsdk
 sudo emsdk update
