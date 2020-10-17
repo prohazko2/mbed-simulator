@@ -1,6 +1,23 @@
+# Fixed fork of the experimental simulator for Mbed OS 5 applications
+
+### Motivation
+ - While *some* of the instructions from the original readme work, most of them don't anymore because of version mismatches and whatnot. 
+ - What's extra frustrating is that even the docker image doesn't work
+ - Not all the demos that are online exist in the original repository.
+ - I need my Embedded Systems students to have an independent (of internet, arm server outages etc.) development environment.
+ 
+### What's new?
+ - Readme below is modified to reflect updated/advised setup method.
+ - This also sets up a modified version of FreeRTOS-Emulator repo by @alxhoff.
+ - It sets up some of my favourite editors and programs too (sublime, terminator)
+ 
+### TL;DR ?
+
+ - Run `setup_script.bash`
+
 # Experimental simulator for Mbed OS 5 applications
 
-**Demo: https://labs.mbed.com/simulator**
+**Demo: https://simulator.mbed.com**
 
 ![Screenshot](https://os.mbed.com/media/uploads/janjongboom/simulator2.png)
 
@@ -24,154 +41,34 @@ To make this feedback loop much shorter, we're releasing an alpha version of the
 
 ## Installation
 
-There are two ways of installing and running the simulator: either using Docker
-or installing a locally hosted version.
-
-### Docker installation
-
-1. Install Docker
-1. Build the Docker image:  
-    `docker build -t mbed/simulator .`
-1. Run the Docker image:  
-    `docker run -p 8002:7829 mbed/simulator`
-1. The simulator can now be accessed at  
-    http://localhost:8002
-
 ### Local installation
 
-#### Prerequisites
+**Currently Arch Linux Only (Manjaro advised)**
 
-1. Install [Mbed CLI](https://github.com/ARMmbed/mbed-cli).
-1. Install [Python 2.7](https://www.python.org/downloads/windows/) - **not Python 3!**.
-1. Install [Git](https://git-scm.com/).
-1. Install [Mercurial](https://www.mercurial-scm.org/wiki/Download).
-1. Install [Node.js](https://nodejs.org/en/) v8 or higher.
+1. Run the setup script and follow the prompts. Note that this will download all dependencies (including Mbed OS) and will build the common `libmbed` library so this'll take some time.
 
-Make sure that all of these are in your PATH. Verify this by opening a command prompt or terminal, and running:
-
-```
-$ where mbed
-C:\Python27\Scripts\mbed.exe
-
-$ where node
-C:\Program Files\nodejs2\node.exe
-
-$ where git
-C:\Program Files\Git\cmd\git.exe
-
-$ where hg
-C:\Program Files\TortoiseHg\hg.exe
-```
-
-On Linux and macOS use `which` instead of `where`.
-
-If one of the `where` / `which` commands does not yield a path, the utility is not in your PATH.
-
-#### Installing Emscripten
-
-To install the Emscripten cross-compilation toolchain, open a command prompt and:
-
-1. Clone the repository and install SDK version 1.38.21:
 
     ```
-    $ git clone https://github.com/emscripten-core/emsdk.git
-    $ cd emsdk
-    $ emsdk install fastcomp-clang-tag-e1.38.21-64bit
-    $ emsdk activate fastcomp-clang-tag-e1.38.21-64bit
-
-    # on Windows only:
-    $ emsdk_env.bat --global
+    $ ./setup_script.bash
     ```
 
-1. Verify that the installation was successful:
+2. Run the simulator (this will activate some environment variables):
 
     ```
-    $ emcc -v
-    emcc (Emscripten gcc/clang-like replacement + linker emulating GNU ld) 1.38.21
+    $ ./start_mbed_simulator.bash
     ```
 
-1. Find the folder where emcc was installed:
+**Ubuntu**
 
-    **Windows**
+It's quite possible an equivalent of the setup script could be written. I won't. But if you do, feel free to send a PR. I'll test it and accept it.
 
-    ```
-    $ where emcc
-    C:\simulator\emsdk\emscripten\1.38.21\emcc
-    ```
+**MacOS**
 
-    **macOS and Linux**
+Get a real computer.
 
-    ```
-    $ which emcc
-    ~/toolchains/emsdk/emscripten/1.38.21/emcc
-    ```
+**Windows**
 
-1. Add this folder to your PATH.
-    * On Windows:
-        * Go to **System Properties > Advanced > Environmental variables**.
-        * Find `PATH`.
-        * Add the folder you found in the previous step, and add it prefixed by `;`. E.g.: `;C:\simulator\emsdk\emscripten\1.38.21\`
-    * On macOS / Linux:
-        * Open `~/.bash_profile` or `~/.bashrc` and add:
-
-        ```
-        PATH=$PATH:~/toolchains/emsdk/emscripten/1.38.21
-        ```
-
-1. Open a new command prompt and verify that `emcc` can still be found by running:
-
-    ```
-    $ where emcc
-    C:\simulator\emsdk\emscripten\1.38.21\emcc
-    ```
-
-1. All set!
-
-#### Installing the simulator through npm
-
-Last, install the simulator. Easiest is through npm:
-
-1. Install the simulator:
-
-    ```
-    $ npm install mbed-simulator -g
-    ```
-
-1. Clone an Mbed OS example program:
-
-    ```
-    $ mbed import mbed-os-example-blinky
-    $ cd mbed-os-example-blinky
-    ```
-
-1. Run the simulator:
-
-    ```
-    $ mbed-simulator .
-    ```
-
-    Note that this will download all dependencies (including Mbed OS) and will build the common `libmbed` library so this'll take some time.
-
-#### Installing the simulator from source
-
-1. Install the simulator through git:
-
-    ```
-    $ git clone https://github.com/ARMmbed/mbed-simulator.git
-    $ cd mbed-simulator
-    $ npm install
-    $ npm install . -g
-    ```
-
-1. Build your first example:
-
-    ```
-    $ node cli.js -i demos\blinky -o out --launch
-    ```
-
-    Note that this will download all dependencies (including Mbed OS) and will build the common `libmbed` library so this'll take some time.
-
-1. Done! The Mbed Simulator should now launch in your default browser.
+Get a real development computer.
 
 ### Troubleshooting
 
@@ -248,3 +145,4 @@ $ npm run build-demos
 * `viewer/img/controller_mbed.svg` - created by [Fritzing](https://github.com/fritzing/fritzing-parts), licensed under Creative Commons Attribution-ShareALike 3.0 Unported.
 * Thermometer by https://codepen.io/mirceageorgescu/pen/Ceylz. Licensed under MIT.
 * LED icons from https://pixabay.com/en/led-icon-logo-business-light-1715226/, Licensed under CC0 Creative Commons.
+* Some of the demo/component JS sources were taken from https://simulator.mbed.com.
