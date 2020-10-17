@@ -45,8 +45,12 @@ To make this feedback loop much shorter, we're releasing an alpha version of the
 
 **Currently Arch Linux Only (Manjaro advised)**
 
-1. Run the setup script and follow the prompts. Note that this will download all dependencies (including Mbed OS) and will build the common `libmbed` library so this'll take some time.
-
+1. Run the setup script and follow the prompts. Note that this will download all dependencies (including Mbed OS) and will build the common `libmbed` library so this'll take some time. 
+I highly advise to give it a good read before running the script;
+ - It'll call sudo, 
+ - it will install development libraries such as SDL2, clang, binutils, fakeroot, base-devel, cmake, 
+ - it'll install nvm, npm and emsdk environments. 
+While this is great for a student with a fresh VM, may be disastrous if you've a finely aged development environment (but then you should also know better than running arbitrary scripts from internet :)).
 
     ```
     $ ./setup_script.bash
