@@ -17,7 +17,7 @@ function buildDemo(root_demos_directory, demo_directory) {
             '-o',
             demo_output_directory,
             '--compiler-opts',
-            '-Os'
+            '-O2'
         ]
     );
 
