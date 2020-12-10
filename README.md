@@ -1,4 +1,4 @@
-# Fixed fork of the experimental simulator for Mbed OS 5 applications
+# Fixed fork of the experimental simulator for Mbed OS 5.11 applications
 
 ### Motivation
  - While *some* of the instructions from the original readme work, most of them don't anymore because of version mismatches and whatnot. 
@@ -7,6 +7,9 @@
  - I need my Embedded Systems students to have an independent (of internet, arm server outages etc.) development environment.
  
 ### What's new?
+ - Bumped to mbed-os 5.11 thanks to @janjongboom
+ - Has a stdin serial demo also thanks to @janjongboom
+ - We almost made the MQTT demo work (but socket.recv function does not timeout so the program hangs).
  - Readme below is modified to reflect updated/advised setup method.
  - This also sets up a modified version of FreeRTOS-Emulator repo by @alxhoff.
  - It sets up some of my favourite editors and programs too (sublime, terminator)
