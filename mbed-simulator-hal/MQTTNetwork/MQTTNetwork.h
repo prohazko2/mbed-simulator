@@ -24,6 +24,9 @@ public:
     }
 
     int write(unsigned char* buffer, int len, int timeout) {
+        socket->set_blocking(true);
+        // socket->set_timeout(-1);
+        socket->set_timeout(timeout <= 0 ? 1 : timeout);
         return socket->send(buffer, len);
     }
 
