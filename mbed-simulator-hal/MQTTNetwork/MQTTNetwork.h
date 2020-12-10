@@ -15,7 +15,12 @@ public:
     }
 
     int read(unsigned char* buffer, int len, int timeout) {
-        return socket->recv(buffer, len);
+        // printf("read %d %d\r\n", len, timeout);
+        socket->set_blocking(true);
+        socket->set_timeout(timeout <= 0 ? 1 : timeout);
+        int rc = socket->recv(buffer, len);
+        // printf("rc = %d\r\n", rc);
+        return rc;
     }
 
     int write(unsigned char* buffer, int len, int timeout) {
