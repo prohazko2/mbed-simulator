@@ -10,6 +10,7 @@
 #include "MQTTClient.h"
 #define logMessage printf
 
+#define WAIT_MS_FOR_MESSAGE 100
 
 // Get access to the network interface
 NetworkInterface *net = NetworkInterface::get_default_instance();
@@ -20,7 +21,7 @@ void messageArrived(MQTT::MessageData& md)
     logMessage("Message arrived: qos %d, retained %d, dup %d, packetid %d\r\n", message.qos, message.retained, message.dup, message.id);
     logMessage("Payload %.*s\r\n", message.payloadlen, (char*)message.payload);
     ++arrivedcount;
-    printf("Received MQTT message count: %d\n", arrivedcount);
+    printf("Received MQTT message count: %d\r\n", arrivedcount);
 }
 // Socket demo
 int main() 
@@ -55,11 +56,12 @@ int main()
         logMessage("rc from MQTT connect is %d\r\n", rc);
     if ((rc = client.subscribe(topic, MQTT::QOS2, messageArrived)) != 0)
         logMessage("rc from MQTT subscribe is %d\r\n", rc);
+        
     MQTT::Message message;
     // QoS 0
-    printf("QOS 0\n");
+    printf("\r\nQOS 0\r\n");
     char buf[100];
-    sprintf(buf, "Hello World!  QoS 0 message from app version %f\r\n", version);
+    sprintf(buf, "Hello World!  QoS 0 message from app version %f", version);
     message.qos = MQTT::QOS0;
     message.retained = false;
     message.dup = false;
@@ -68,34 +70,44 @@ int main()
     rc = client.publish(topic, message);
     while (arrivedcount < 1)
     {
-        client.yield(100);
-        printf("yielded for 100 msec\n");
+        client.yield(WAIT_MS_FOR_MESSAGE);
+        printf("yielded for %d msec\n", WAIT_MS_FOR_MESSAGE);
     }
-    printf("QOS 1\n");
+    
+    printf("\r\nQOS 1\r\n");
     // QoS 1
-    sprintf(buf, "Hello World!  QoS 1 message from app version %f\r\n", version);
+    sprintf(buf, "Hello World!  QoS 1 message from app version %f", version);
     message.qos = MQTT::QOS1;
     message.payloadlen = strlen(buf)+1;
     rc = client.publish(topic, message);
     while (arrivedcount < 2)
-        client.yield(100);
+    {
+        client.yield(WAIT_MS_FOR_MESSAGE);
+        printf("yielded for %d msec\n", WAIT_MS_FOR_MESSAGE);
+    }
         
-    printf("QOS 2\n");
+    printf("\r\nQOS 2\r\n");
     // QoS 2
-    sprintf(buf, "Hello World!  QoS 2 message from app version %f\r\n", version);
+    sprintf(buf, "Hello World!  QoS 2 message from app version %f", version);
     message.qos = MQTT::QOS2;
     message.payloadlen = strlen(buf)+1;
     rc = client.publish(topic, message);
     while (arrivedcount < 3)
-        client.yield(100);
+    {
+        client.yield(WAIT_MS_FOR_MESSAGE);
+        printf("yielded for %d msec\n", WAIT_MS_FOR_MESSAGE);
+    }
+        
+
     if ((rc = client.unsubscribe(topic)) != 0)
         logMessage("rc from unsubscribe was %d\r\n", rc);
     if ((rc = client.disconnect()) != 0)
         logMessage("rc from disconnect was %d\r\n", rc);
     mqttNetwork.disconnect();
     logMessage("Version %.2f: finish %d msgs\r\n", version, arrivedcount);
+    
     // Bring down the network interface
-    printf("MQTT Finish");
     net->disconnect();
+    printf("MQTT Demo finished...\r\n");
     return 0;
 }
