@@ -59,7 +59,7 @@
   <script type="text/javascript" src="/js-hal/EventEmitter.js"></script>
   <script type="text/javascript" src="/js-hal/pinnames.js"></script>
   <script type="text/javascript" src="/js-hal/gpio.js"></script>
-  <script type="text/javascript" src="/js-hal/timers.js"></script>
+  <script type="text/javascript" src="/js-hal/usticker.js"></script>
   <script type="text/javascript" src="/js-hal/network.js"></script>
   <script type="text/javascript" src="/js-hal/lora.js"></script>
   <script type="text/javascript" src="/js-hal/blockdevice.js"></script>
@@ -67,12 +67,14 @@
   <script type="text/javascript" src="/peripherals/BSP_DISCO_F413ZH/js-hal/st7789h2_ft6x06.js"></script>
   <script type="text/javascript" src="/peripherals/C12832/js-hal/C12832.js"></script>
   <script type="text/javascript" src="/peripherals/Sht31/js-hal/sht31.js"></script>
+  <script type="text/javascript" src="/js-hal/serial.js"></script>
   {{#each jshal}}
   <script type="text/javascript" src="{{{script}}}"></script>
   {{/each}}
 
   <!-- UI handling -->
   <script type="text/javascript" src="/js-ui/board.js"></script>
+  <script type="text/javascript" src="/js-ui/serial.js"></script>
   <script type="text/javascript" src="/js-ui/components/base_component.js"></script>
   <script type="text/javascript" src="/js-ui/components/led.js"></script>
   <script type="text/javascript" src="/js-ui/components/push_button.js"></script>

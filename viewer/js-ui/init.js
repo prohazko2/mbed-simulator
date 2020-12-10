@@ -1,11 +1,6 @@
 (function() {
     window.socket = io.connect(location.origin);
 
-    var terminal = new Terminal({
-        scrollback: 1000000
-    });
-    terminal.open(document.querySelector('#output'));
-
     var Module = {
         preRun: [
             function() {
@@ -30,19 +25,14 @@
             }
         ],
         postRun: [],
-        print: (function () {
-            return function (text) {
-                for (var ix = 0; ix < arguments.length; ix++) {
-                    // used to communicate back to Puppeteer (see cli.js)
-                    if (typeof window.onPrintEvent === 'function') {
-                        window.onPrintEvent(arguments[ix]);
-                    }
-                    // this is an emscripten thing... only flushes when a newline happens.
-                    terminal.write(arguments[ix] + '\r\n');
-                }
-            };
-        })(),
-        printErr: function (text) {
+        print: function () {
+            for (var ix = 0; ix < arguments.length; ix++) {
+                var line = arguments[ix];
+
+                window.MbedJSHal.serial.writeLine(line + '\r\n');
+            }
+        },
+        printErr: function () {
             for (var ix = 0; ix < arguments.length; ix++) {
                 // terminal.write(arguments[ix]);
                 console.error(arguments[ix]);
