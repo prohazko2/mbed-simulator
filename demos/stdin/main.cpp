@@ -30,5 +30,6 @@ int main() {
                 pc.printf("Unrecognized input '%c'\n", c);
                 break;
         }
+        wait_ms(10);
     }
 }
