@@ -12,6 +12,19 @@
 
 #define WAIT_MS_FOR_MESSAGE 100
 
+/**************************************************************************************
+
+   MQTT Demo - but beware
+       - For reasons beyond my understanding TCPSocket's recv function does not timeout.
+       Because of this, the yield calls below sometimes never return.
+       - I see this as a non-issue because; you should not use busy waiting in your 
+        embedded applications anyways. This is merely a demo code.
+       - Your best option to make it run towards the finish is to setup your local 
+       mosquitto server and publish from a different client so that socket receives
+       data and continues.
+
+***************************************************************************************/
+
 // Get access to the network interface
 NetworkInterface *net = NetworkInterface::get_default_instance();
 volatile int arrivedcount = 0;
