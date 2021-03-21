@@ -18,8 +18,10 @@ async function loadCode(demo: string) {
   editor.setValue(code);
   commit({ demo });
 
-  sim.src = `/view/${demo}`;
-  sim.style.display = "block";
+  if (sim) {
+    sim.src = `/view/${demo}`;
+    sim.style.display = "block";
+  }
 }
 
 select.addEventListener("change", () => loadCode(select.value));

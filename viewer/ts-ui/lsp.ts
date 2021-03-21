@@ -27,7 +27,7 @@ export function registerCpp(editor: monaco.editor.IStandaloneCodeEditor) {
   });
 
   // create the web socket
-  const url = createUrl("ws://localhost:3005/cpp");
+  const url = createUrl(`ws://${location.host}/lsp/cpp`);
   const webSocket = createWebSocket(url);
 
   // listen when the web socket is opened

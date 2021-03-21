@@ -17,6 +17,8 @@ const timesyncServer = require('timesync/server');
 const version = JSON.parse(fs.readFileSync(Path.join(__dirname, '..', 'package.json'), 'utf-8')).version;
 const compression = require('compression');
 
+const lsp = require('./lsp');
+
 const LORA_PORT = process.env.LORA_PORT || 1700;
 const LORA_HOST = process.env.LORA_HOST || 'router.eu.thethings.network';
 
@@ -55,7 +57,9 @@ const NSAPI_ERROR_TIMEOUT             = -3019; /*!< operation timed out */
 module.exports = function(outFolder, port, staticMaxAge, runtimeLogs, callback) {
     const app = express();
     const server = require('http').Server(app);
-    const io = require('socket.io')(server);
+    //const io = require('socket.io')(server);
+
+    const _lsp = lsp.attach(server);
 
     const consoleLog = runtimeLogs ? console.log.bind(console) : function() {};
 
@@ -226,26 +230,26 @@ module.exports = function(outFolder, port, staticMaxAge, runtimeLogs, callback) 
         }
     });
 
-    io.on('connection', ws => {
-        ws.on('socket-subscribe', id => {
-            if (!sockets[id]) return;
+    // io.on('connection', ws => {
+    //     ws.on('socket-subscribe', id => {
+    //         if (!sockets[id]) return;
 
-            consoleLog('socket-subscribe on', id);
+    //         consoleLog('socket-subscribe on', id);
 
-            sockets[id].subscribers.push(ws);
-        });
+    //         sockets[id].subscribers.push(ws);
+    //     });
 
-        ws.on('disconnect', () => {
-            for (let sk of Object.keys(sockets)) {
-                let s = sockets[sk];
+    //     ws.on('disconnect', () => {
+    //         for (let sk of Object.keys(sockets)) {
+    //             let s = sockets[sk];
 
-                let subIx = s.subscribers.indexOf(ws);
-                if (subIx === -1) return;
+    //             let subIx = s.subscribers.indexOf(ws);
+    //             if (subIx === -1) return;
 
-                s.subscribers.splice(subIx, 1);
-            }
-        });
-    });
+    //             s.subscribers.splice(subIx, 1);
+    //         }
+    //     });
+    // });
 
     app.get('/view/:script', (req, res, next) => {
         let maxAge = 0;
