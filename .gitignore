@@ -9,3 +9,6 @@ mbed-simulator-hal/MQTT/
 mbed-simulator-hal/simple-mbed-cloud-client/
 node_modules/
 out/*.*
+
+.env
+viewer/js-ui/ts-ui.js

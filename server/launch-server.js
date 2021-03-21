@@ -6,6 +6,7 @@ const dgram = require('dgram');
 const hbs = require('hbs');
 const Path = require('path');
 const fs = require('fs');
+const asyncFs = require('fs').promises;
 const compile = require('./compile');
 const { exists } = require('../build-tools/helpers');
 const promisify = require('es6-promisify').promisify;
@@ -513,6 +514,11 @@ module.exports = function(outFolder, port, staticMaxAge, runtimeLogs, callback) 
     function onStdIn(c) {
         io.sockets.emit('stdin', c);
     }
+
+    app.get("/api/ui/demos", async (req, res) => {
+      const dirs = await asyncFs.readdir(Path.join(__dirname, "..", "demos"));
+      res.json(dirs.map((name) => ({ name })));
+    });
 
     console.log('Mbed Simulator v' + version);
 
