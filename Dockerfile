@@ -1,20 +1,25 @@
-FROM node:12.14
+FROM trzeci/emscripten:sdk-tag-1.38.21-64bit
 
-ENV PATH="/emsdk:/emsdk/emscripten/tag-1.38.21:${PATH}"
-ENV EMSDK="/emsdk"
-ENV EM_CONFIG="/root/.emscripten"
-ENV EMSCRIPTEN="/emsdk/emscripten/tag-1.38.21"
-ENV EMSCRIPTEN_NATIVE_OPTIMIZER="/emsdk/emscripten/tag-1.38.21_64bit_optimizer/optimizer"
+RUN apt-get update -y || true
+RUN apt-get -y install python-dev python-setuptools
 
-RUN apt-get update -qq && apt-get -qqy install \
-        cmake git python-dev python-pip && \
-    pip install mbed-cli mercurial && \
-    git clone https://github.com/emscripten-core/emsdk
+RUN pip install mbed-cli mercurial
 
-RUN emsdk/emsdk install fastcomp-clang-e1.38.21-64bit && \
-    emsdk/emsdk activate fastcomp-clang-e1.38.21-64bit && \
-    emsdk/emsdk install emscripten-tag-1.38.21-64bit && \
-    emsdk/emsdk activate emscripten-tag-1.38.21-64bit
+RUN emsdk install emscripten-tag-1.38.21-64bit
+RUN emsdk activate emscripten-tag-1.38.21-64bit
+
+ENV NODE_VERSION v12.14.0
+ENV NVM_DIR /usr/local/nvm
+
+# Install nvm with node and npm
+RUN curl https://raw.githubusercontent.com/creationix/nvm/v0.20.0/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH      $NVM_DIR/v$NODE_VERSION/bin:$PATH
 
 ADD . /app
 
