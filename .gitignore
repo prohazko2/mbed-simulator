@@ -11,4 +11,4 @@ node_modules/
 out/*.*
 
 .env
-viewer/js-ui/ts-ui.js
+viewer/js-ui/v2
