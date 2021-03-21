@@ -6,12 +6,17 @@ import { initEditor } from "./editor";
 const demos = await getDemos();
 
 const select = document.getElementById("select-project") as HTMLSelectElement;
+const sim = document.querySelector("#viewer iframe") as HTMLIFrameElement;
+
 const editor = initEditor(document.getElementById("editor"));
 
 async function loadCode(demo: string) {
   const code = await getCode(demo);
   editor.setValue(code);
   commit({ demo });
+
+  sim.src = `/view/${demo}`;
+  sim.style.display = "block";
 }
 
 select.addEventListener("change", () => loadCode(select.value));
