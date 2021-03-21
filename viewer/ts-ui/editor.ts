@@ -1,8 +1,25 @@
-import * as monaco from "monaco-editor/esm/vs/editor/editor.api";
+import * as monaco from "monaco-editor";
+
+import { exportDebug } from "./util";
+
+import { listen } from "@codingame/monaco-jsonrpc";
+import {
+  MonacoLanguageClient,
+  //MessageConnection,
+  CloseAction,
+  ErrorAction,
+  MonacoServices,
+  createConnection,
+} from "monaco-languageclient";
+
+console.log({
+  listen,
+  MonacoLanguageClient,
+  createConnection,
+  MonacoServices,
+});
 
 import { restored, beforeUnload } from "./store";
-
-console.log(restored);
 
 function getEditorOptions() {
   return {
@@ -40,4 +57,5 @@ beforeUnload(() => {
   };
 });
 
-globalThis["_monaco"] = monaco;
+exportDebug("_monaco", monaco);
+exportDebug("_editor", () => lastEditor);

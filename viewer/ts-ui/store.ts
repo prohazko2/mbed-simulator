@@ -12,6 +12,8 @@ export let restored = JSON.parse(
   localStorage.getItem(STORE_KEY) || "{}"
 ) as UiStore;
 
+console.info("ui-store restored:", restored);
+
 export function commit(state: Partial<UiStore>) {
   const filtered = Object.keys(state || {}).reduce((acc, key) => {
     if (state[key] !== undefined && state[key] !== null) {

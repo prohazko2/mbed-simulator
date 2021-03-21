@@ -2,6 +2,7 @@ import { getDemos, getCode } from "./api";
 import { restored, commit } from "./store";
 
 import { initEditor } from "./editor";
+import { exportDebug } from "./util";
 
 const demos = await getDemos();
 
@@ -26,5 +27,3 @@ for (const { name } of demos) {
   select.appendChild(new Option(name, name, selected, selected));
 }
 loadCode(select.value);
-
-globalThis["_editor"] = editor;
