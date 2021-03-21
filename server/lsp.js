@@ -2,12 +2,25 @@ const ws = require("ws");
 
 const rpcServer = require("vscode-ws-jsonrpc/lib/server");
 
-let languageServers = {
-  "lsp/cpp": [
-    "ccls",
-    '--init={"cacheDirectory":".cachedir","cacheFormat":"json","index":{"onChange":true,"trackDependency":2}}',
-  ],
+const initOpts = {
+  cache: {
+    directory: ".ccls-cache",
+    format: "json",
+  },
+  client: {
+    linkSupport: false,
+  },
+  codeLens: {
+    localVariables: false,
+  },
 };
+
+let languageServers = {
+  "lsp/cpp": ["ccls", `--init=${JSON.stringify(initOpts)}`],
+};
+
+const ccls = languageServers["lsp/cpp"];
+console.log(`lsp: ${ccls[0]} ${ccls[1]}`);
 
 function attach(server) {
   const wss = new ws.Server(
