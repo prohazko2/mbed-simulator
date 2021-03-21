@@ -3,7 +3,7 @@ const ws = require("ws");
 const rpcServer = require("vscode-ws-jsonrpc/lib/server");
 
 let languageServers = {
-  "lsp/cpp  ": [
+  "lsp/cpp": [
     "ccls",
     '--init={"cacheDirectory":".cachedir","cacheFormat":"json","index":{"onChange":true,"trackDependency":2}}',
   ],
