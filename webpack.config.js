@@ -26,6 +26,9 @@ module.exports = {
     path: path.resolve(__dirname, "viewer/js-ui/v2"),
     filename: "app.js",
   },
+  node: {
+    global: true,
+  },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
     fallback: {
@@ -58,12 +61,17 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.pid": JSON.stringify(1),
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+    }),
     new webpack.ProvidePlugin({
       Buffer: ["buffer", "Buffer"],
     }),
     new webpack.ContextReplacementPlugin(/vscode*/, path.join(__dirname, "./")),
     new MonacoWebpackPlugin({
       languages: ["json", "cpp"],
+      features: ["!referenceSearch"],
     }),
   ],
 };

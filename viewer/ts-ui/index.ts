@@ -4,6 +4,8 @@ import { restored, commit } from "./store";
 import { initEditor } from "./editor";
 import { exportDebug } from "./util";
 
+exportDebug("setImmediate", (fn) => setTimeout(fn, 0));
+
 const demos = await getDemos();
 
 const select = document.getElementById("select-project") as HTMLSelectElement;
