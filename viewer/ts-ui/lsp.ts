@@ -23,7 +23,7 @@ monaco.languages.register({
 export function registerCpp(editor: monaco.editor.IStandaloneCodeEditor) {
   // install Monaco language client services
   MonacoServices.install(editor, {
-    rootUri: "file:///home/prohazko/work/mbed-simulator/",
+    rootUri: "file:///app/",
   });
 
   // create the web socket

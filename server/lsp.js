@@ -2,23 +2,21 @@ const ws = require("ws");
 
 const rpcServer = require("vscode-ws-jsonrpc/lib/server");
 
-const initOpts = {
-  cache: {
-    directory: ".ccls-cache",
-    format: "json",
-  },
-  // client: {
-  //   linkSupport: false,
-  // },
-  // codeLens: {
-  //   localVariables: false,
-  // },
-};
+let clangdBin = process.env["CLANGD_BIN"];
+
+if (!clangdBin) {
+  const maybeLocal = require("path").resolve(__dirname, "clangd");
+  if (require("fs").existsSync(maybeLocal)) {
+    clangdBin = maybeLocal;
+  }
+}
+if (!clangdBin) {
+  clangdBin = "clangd";
+}
 
 let languageServers = {
   //"lsp/cpp": ["ccls", `--init=${JSON.stringify(initOpts)}`],
-  "lsp/cpp": ["clangd-9"],
-
+  "lsp/cpp": [clangdBin],
 };
 
 const ccls = languageServers["lsp/cpp"];

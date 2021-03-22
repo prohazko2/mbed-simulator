@@ -13,7 +13,7 @@ function getEditorOptions() {
       "",
       "cpp",
       monaco.Uri.parse(
-        "file:///home/prohazko/work/mbed-simulator/demos/blinky/main.cpp"
+        "file:///app/demos/blinky/main.cpp"
       )
     ),
 
