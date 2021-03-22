@@ -14,7 +14,7 @@ const DEBUG = process.env["NODE_ENV"] === "development";
 
 module.exports = {
   watch: DEBUG,
-  mode: DEBUG ? "development" : "produection",
+  mode: DEBUG ? "development" : "production",
 
   entry: "./viewer/ts-ui/index.ts",
 

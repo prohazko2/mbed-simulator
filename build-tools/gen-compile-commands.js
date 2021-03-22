@@ -1,5 +1,6 @@
 const dir = require("path").resolve(__dirname, "..");
 
+
 const lines = require("fs")
   .readFileSync(`${__dirname}/include-dirs.txt`)
   .toString()
@@ -11,7 +12,7 @@ const lines = require("fs")
 const file = `${dir}/demos/blinky/main.cpp`;
 
 const cmd = {
-  command: `/usr/bin/clang++ -std=c++20 -DTARGET_SIMULATOR ${lines.join(
+  command: `/usr/bin/clang++ -DTARGET_SIMULATOR ${lines.join(
     " "
   )} -c ${file}`,
   directory: dir,

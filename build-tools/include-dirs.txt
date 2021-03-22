@@ -1,4 +1,3 @@
-
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/factory-configurator-client/factory-configurator-client/factory-configurator-client/ 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/update-client-hub/modules/pal-target-specific/update-client-pal-target-specific/ 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/update-client-hub/modules/source-http-socket/update-client-source-http-socket/ 
@@ -174,7 +173,6 @@
 /app/mbed-simulator-hal/mbed-os/features/storage/ 
 /app/mbed-simulator-hal/peripherals/Sht31/js-hal/ 
 /app/mbed-simulator-hal/mbed-os/features/lorawan/ 
-/app/mbed-simulator-hal/pelion-dm/storage_helper/ 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/ 
 /app/mbed-simulator-hal/mbed-os/features/mbedtls/ 
 /app/mbed-simulator-hal/peripherals/Sht31/js-ui/ 
@@ -197,8 +195,8 @@
 /app/mbed-simulator-hal/MQTTNetwork/ 
 /app/mbed-simulator-hal/peripherals/ 
 /app/mbed-simulator-hal/mbed-http/ 
-/app/mbed-simulator-hal/pelion-dm/ 
 /app/mbed-simulator-hal/mbed-os/ 
 /app/mbed-simulator-hal/MQTT/FP/ 
 /app/mbed-simulator-hal/MQTT/ 
 /app/mbed-simulator-hal/
+/app/include-cclsp

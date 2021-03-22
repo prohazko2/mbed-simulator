@@ -8,6 +8,8 @@ RUN pip install mbed-cli mercurial
 RUN emsdk install emscripten-tag-1.38.21-64bit
 RUN emsdk activate emscripten-tag-1.38.21-64bit
 
+
+# nvm 
 ENV NODE_VERSION v12.14.0
 ENV NVM_DIR /usr/local/nvm
 
@@ -26,7 +28,14 @@ ADD . /app
 
 WORKDIR /app
 
-RUN npm install && npm run build-demos
+# c++ language server
+RUN mbed deploy
+RUN apt-get -y install clang clangd
+RUN node build-tools/gen-compile-commands.js > compile_commands.json
+
+
+RUN npm install
+RUN npm run build-ui
 
 EXPOSE 7829
 
