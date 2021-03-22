@@ -12,6 +12,8 @@ out/*.*
 
 .env
 .clangd
+clangd
+clangd-*.zip
 .ccls-cache
 viewer/js-ui/v2
 
