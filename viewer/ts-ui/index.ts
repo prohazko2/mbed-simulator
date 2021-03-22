@@ -22,7 +22,9 @@ const sim = document.querySelector("#viewer iframe") as HTMLIFrameElement;
 const saveButton = document.getElementById("save-demo") as HTMLButtonElement;
 const runButton = document.getElementById("run") as HTMLButtonElement;
 const runStatus = document.getElementById("run-status") as HTMLElement;
-const compileFailed = document.querySelector('#compilation-failed') as HTMLElement;
+const compileFailed = document.querySelector(
+  "#compilation-failed"
+) as HTMLElement;
 
 const editor = initEditor(document.getElementById("editor"), { rootPath });
 
@@ -67,6 +69,8 @@ runButton.addEventListener("click", async () => {
       sim.style.display = "block";
     }
     compileFailed.style.display = "none";
+    runStatus.title = "";
+    runStatus.textContent = "";
   } catch (err) {
     console.error(`compile code`);
     console.error(err);
