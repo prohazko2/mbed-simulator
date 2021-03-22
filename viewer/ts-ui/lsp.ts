@@ -20,21 +20,25 @@ monaco.languages.register({
   aliases: ["cpp", "c++", "cc", "c", "ino"],
 });
 
-export function registerCpp(editor: monaco.editor.IStandaloneCodeEditor) {
-  // install Monaco language client services
+export type LspOptions = {
+  rootPath: string;
+}
+
+export function registerCpp(
+  editor: monaco.editor.IStandaloneCodeEditor,
+  opts: LspOptions
+) {
+
   MonacoServices.install(editor, {
-    rootUri: "file:///app/",
+    rootUri: `file://${opts.rootPath}`,
   });
 
-  // create the web socket
   const url = createUrl(`ws://${location.host}/lsp/cpp`);
   const webSocket = createWebSocket(url);
 
-  // listen when the web socket is opened
   listen({
     webSocket: webSocket as any,
     onConnection: (connection) => {
-      // create and start the language client
       const languageClient = createLanguageClient(connection);
       const disposable = languageClient.start();
       connection.onClose(() => disposable.dispose());
@@ -47,15 +51,12 @@ export function registerCpp(editor: monaco.editor.IStandaloneCodeEditor) {
     return new MonacoLanguageClient({
       name: "Sample Language Client",
       clientOptions: {
-        // use a language id as a document selector
         documentSelector: ["cpp"],
-        // disable the default error handler
         errorHandler: {
           error: () => ErrorAction.Continue,
           closed: () => CloseAction.DoNotRestart,
         },
       },
-      // create a language client connection from the JSON RPC connection on demand
       connectionProvider: {
         get: (errorHandler, closeHandler) => {
           return Promise.resolve(

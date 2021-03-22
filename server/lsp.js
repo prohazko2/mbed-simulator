@@ -5,7 +5,11 @@ const rpcServer = require("vscode-ws-jsonrpc/lib/server");
 let clangdBin = process.env["CLANGD_BIN"];
 
 if (!clangdBin) {
-  const maybeLocal = require("path").resolve(__dirname, "clangd");
+  const maybeLocal = require("path").resolve(
+    __dirname,
+    "..",
+    "clangd/bin/clangd"
+  );
   if (require("fs").existsSync(maybeLocal)) {
     clangdBin = maybeLocal;
   }

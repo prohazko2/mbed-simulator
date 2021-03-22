@@ -45,8 +45,7 @@ RUN mbed deploy
 RUN node build-tools/mbed-monkey-patch.js
 RUN node build-tools/gen-compile-commands.js > compile_commands.json
 
-COPY --from=ui-builder /app/clangd_11.0.0/bin/clangd /app/server/clangd
-COPY --from=ui-builder /app/clangd_11.0.0/lib /app/lib
+COPY --from=ui-builder /app/clangd_11.0.0 /app/clangd
 COPY --from=ui-builder /app/viewer/js-ui/v2 /app/viewer/js-ui/v2
 
 EXPOSE 7829

@@ -35,7 +35,6 @@
     "getmac": "^1.4.1",
     "hbs": "^4.1.1",
     "opn": "^6.0.0",
-    "puppeteer": "^2.1.1",
     "socket.io": "^2.4.1",
     "timesync": "^1.0.2",
     "vscode-ws-jsonrpc": "^0.2.0",

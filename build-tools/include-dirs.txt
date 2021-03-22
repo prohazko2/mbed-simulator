@@ -1,4 +1,5 @@
 /app/include-cclsp/
+/app/clangd/lib/clang/11.0.0/include
 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/factory-configurator-client/factory-configurator-client/factory-configurator-client/ 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/update-client-hub/modules/pal-target-specific/update-client-pal-target-specific/ 
