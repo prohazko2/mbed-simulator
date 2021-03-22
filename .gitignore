@@ -9,3 +9,12 @@ mbed-simulator-hal/MQTT/
 mbed-simulator-hal/simple-mbed-cloud-client/
 node_modules/
 out/*.*
+
+.env
+.clangd
+clangd
+clangd-*.zip
+.ccls-cache
+viewer/js-ui/v2
+
+compile_commands.json

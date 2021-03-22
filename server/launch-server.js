@@ -16,6 +16,10 @@ const timesyncServer = require('timesync/server');
 const version = JSON.parse(fs.readFileSync(Path.join(__dirname, '..', 'package.json'), 'utf-8')).version;
 const compression = require('compression');
 
+const { buildFile, buildDirectory } = require('../build-tools/build-application');
+
+const lsp = require('./lsp');
+
 const LORA_PORT = process.env.LORA_PORT || 1700;
 const LORA_HOST = process.env.LORA_HOST || 'router.eu.thethings.network';
 
@@ -54,7 +58,26 @@ const NSAPI_ERROR_TIMEOUT             = -3019; /*!< operation timed out */
 module.exports = function(outFolder, port, staticMaxAge, runtimeLogs, callback) {
     const app = express();
     const server = require('http').Server(app);
+
+    const _lsp = lsp.attach(server);
     const io = require('socket.io')(server);
+
+    let [lspUpgrade, ioUpgrade] = server.listeners('upgrade').slice(0);
+    server.removeAllListeners('upgrade');
+
+    server.on("upgrade", (req, socket, head) => {
+      console.log("upgrade req.url", req.url);
+      if (req.url.startsWith("/lsp/cpp")) {
+        lspUpgrade(req, socket, head);
+        return;
+      }
+      if (req.url.startsWith("/socket.io/")) {
+        ioUpgrade(req, socket, head);
+        return;
+      }
+      console.log("unknown upgrade path, dropping");
+      socket.destroy();
+    });
 
     const consoleLog = runtimeLogs ? console.log.bind(console) : function() {};
 
@@ -513,6 +536,58 @@ module.exports = function(outFolder, port, staticMaxAge, runtimeLogs, callback) 
     function onStdIn(c) {
         io.sockets.emit('stdin', c);
     }
+
+    app.get("/api/ui/demos", async (req, res) => {
+      const rootPath = Path.join(__dirname, "..");
+      const demosPath = Path.join(rootPath, "demos");
+      const dirs = await promisify(fs.readdir)(demosPath);
+      res.json({
+        rootPath,
+        demosPath,
+        demos: dirs.map((name) => ({
+          name,
+          path: Path.join(rootPath, name, "main.cpp"),
+        })),
+      });
+    });
+
+    app.patch("/api/ui/demos/:demo", async (req, res) => {
+      const { code } = req.body;
+      if (!code) {
+        throw new Error('send code in "code" field');
+      }
+      const rootPath = Path.join(__dirname, "..");
+      const demoPath = Path.join(
+        rootPath,
+        "demos",
+        req.params.demo,
+        "main.cpp"
+      );
+
+      await promisify(fs.writeFile)(demoPath, code);
+      res.json({ code, demoPath });
+    });
+
+    app.post("/api/ui/demos/:demo/compile", async (req, res) => {
+      const rootPath = Path.join(__dirname, "..");
+      const demoPath = Path.join(
+        rootPath,
+        "demos",
+        req.params.demo
+      );
+
+      const outPath = Path.join(rootPath, "out", `${req.params.demo}.js`);
+
+      console.time(`compile: ${demoPath}`);
+
+      try {
+        await buildDirectory(demoPath, outPath, ["-O2"], false, true);
+        res.json({ ok: true });
+      } catch (err) {
+        res.status(500);
+        res.json({ err: err.toString() });
+      }
+    });
 
     console.log('Mbed Simulator v' + version);
 

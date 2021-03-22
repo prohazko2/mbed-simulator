@@ -1,3 +1,15 @@
+FROM node:12.21.0 as ui-builder
+LABEL stage=builder
+
+ADD . /app
+WORKDIR /app
+
+RUN wget https://github.com/clangd/clangd/releases/download/11.0.0/clangd-linux-11.0.0.zip
+RUN unzip clangd-linux-11.0.0.zip
+
+RUN npm install
+RUN npm run build-ui
+
 FROM trzeci/emscripten:sdk-tag-1.38.21-64bit
 
 RUN apt-get update -y || true
@@ -8,6 +20,8 @@ RUN pip install mbed-cli mercurial
 RUN emsdk install emscripten-tag-1.38.21-64bit
 RUN emsdk activate emscripten-tag-1.38.21-64bit
 
+
+# nvm 
 ENV NODE_VERSION v12.14.0
 ENV NVM_DIR /usr/local/nvm
 
@@ -23,10 +37,20 @@ RUN echo "source $NVM_DIR/nvm.sh && \
     nvm use default" | bash
 
 ADD . /app
-
 WORKDIR /app
 
-RUN npm install && npm run build-demos
+RUN npm install --only=prod
+
+RUN mbed deploy
+RUN node build-tools/mbed-monkey-patch.js
+RUN node build-tools/gen-compile-commands.js > compile_commands.json
+
+COPY --from=ui-builder /app/clangd_11.0.0 /app/clangd
+COPY --from=ui-builder /app/viewer/js-ui/v2 /app/viewer/js-ui/v2
+
+# prebuild blinky and mqtt
+RUN node cli.js -v -i demos/blinky -o out/blinky.js --compiler-opts -O2
+RUN node cli.js -v -i demos/MQTT -o out/MQTT.js --compiler-opts -O2
 
 EXPOSE 7829
 
