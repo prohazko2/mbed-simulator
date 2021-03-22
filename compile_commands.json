@@ -1,7 +1,0 @@
-[
-    {
-      "directory": "/home/prohazko/work/mbed-simulator",
-      "command": "/usr/bin/clang++ -std=c++20 -DTARGET_SIMULATOR    -I/home/prohazko/work/mbed-simulator/mbed-simulator-hal/mbed-os/targets/TARGET_SIMULATOR    -I/home/prohazko/work/mbed-simulator/mbed-simulator-hal/mbed-os/    -I/home/prohazko/work/mbed-simulator/mbed-simulator-hal/mbed-os/hal/    -I/home/prohazko/work/mbed-simulator/mbed-simulator-hal/mbed-os/platform/    -I/home/prohazko/work/mbed-simulator/mbed-simulator-hal/mbed-os/platform/include/ -I/home/prohazko/work/mbed-simulator/mbed-simulator-hal/mbed-os/features/netsocket    -c /home/prohazko/work/mbed-simulator/demos/blinky/main.cpp",
-      "file": "/home/prohazko/work/mbed-simulator/demos/blinky/main.cpp"
-    }
-]  

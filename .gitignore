@@ -14,3 +14,5 @@ out/*.*
 .clangd
 .ccls-cache
 viewer/js-ui/v2
+
+compile_commands.json
