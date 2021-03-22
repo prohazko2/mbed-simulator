@@ -1,3 +1,5 @@
+/app/include-cclsp/
+
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/factory-configurator-client/factory-configurator-client/factory-configurator-client/ 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/update-client-hub/modules/pal-target-specific/update-client-pal-target-specific/ 
 /app/mbed-simulator-hal/simple-mbed-cloud-client/mbed-cloud-client/update-client-hub/modules/source-http-socket/update-client-source-http-socket/ 
@@ -199,4 +201,4 @@
 /app/mbed-simulator-hal/MQTT/FP/ 
 /app/mbed-simulator-hal/MQTT/ 
 /app/mbed-simulator-hal/
-/app/include-cclsp
+

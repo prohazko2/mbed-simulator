@@ -12,7 +12,7 @@ const lines = require("fs")
 const file = `${dir}/demos/blinky/main.cpp`;
 
 const cmd = {
-  command: `/usr/bin/clang++ -DTARGET_SIMULATOR ${lines.join(
+  command: `/usr/bin/clang++ -DLSP_INDEX_ONLY -DTARGET_SIMULATOR ${lines.join(
     " "
   )} -c ${file}`,
   directory: dir,

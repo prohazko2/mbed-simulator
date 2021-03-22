@@ -1,7 +1,7 @@
 FROM trzeci/emscripten:sdk-tag-1.38.21-64bit
 
 RUN apt-get update -y || true
-RUN apt-get -y install python-dev python-setuptools
+RUN apt-get -y install tini python-dev python-setuptools
 
 RUN pip install mbed-cli mercurial
 
@@ -31,12 +31,12 @@ WORKDIR /app
 # c++ language server
 RUN mbed deploy
 RUN apt-get -y install clang clangd
+RUN node build-tools/mbed-monkey-patch.js
 RUN node build-tools/gen-compile-commands.js > compile_commands.json
-
 
 RUN npm install
 RUN npm run build-ui
 
 EXPOSE 7829
 
-CMD ["node", "server.js"]
+ENTRYPOINT ["/usr/bin/tini", "--", "node", "server.js"]
