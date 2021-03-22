@@ -7,16 +7,18 @@ const initOpts = {
     directory: ".ccls-cache",
     format: "json",
   },
-  client: {
-    linkSupport: false,
-  },
-  codeLens: {
-    localVariables: false,
-  },
+  // client: {
+  //   linkSupport: false,
+  // },
+  // codeLens: {
+  //   localVariables: false,
+  // },
 };
 
 let languageServers = {
-  "lsp/cpp": ["ccls", `--init=${JSON.stringify(initOpts)}`],
+  //"lsp/cpp": ["ccls", `--init=${JSON.stringify(initOpts)}`],
+  "lsp/cpp": ["clangd-9"],
+
 };
 
 const ccls = languageServers["lsp/cpp"];

@@ -11,5 +11,6 @@ node_modules/
 out/*.*
 
 .env
+.clangd
 .ccls-cache
 viewer/js-ui/v2
