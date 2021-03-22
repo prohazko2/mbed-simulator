@@ -1,7 +1,7 @@
 FROM trzeci/emscripten:sdk-tag-1.38.21-64bit
 
 RUN apt-get update -y || true
-RUN apt-get -y install tini python-dev python-setuptools
+RUN apt-get -y install python-dev python-setuptools
 
 RUN pip install mbed-cli mercurial
 
@@ -39,4 +39,4 @@ RUN npm run build-ui
 
 EXPOSE 7829
 
-ENTRYPOINT ["/usr/bin/tini", "--", "node", "server.js"]
+CMD ["node", "server.js"]

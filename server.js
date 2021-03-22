@@ -18,3 +18,11 @@ launchServer(Path.join(__dirname, 'out'), process.env.PORT || 7829, cache , true
 
     // noop
 });
+
+function handleTerm(signal) {
+  console.log(`Received ${signal}, exiting`);
+  process.exit();
+}
+
+process.on('SIGINT', handleTerm);
+process.on('SIGTERM', handleTerm);
