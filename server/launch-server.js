@@ -573,14 +573,15 @@ module.exports = function(outFolder, port, staticMaxAge, runtimeLogs, callback) 
       const demoPath = Path.join(
         rootPath,
         "demos",
-        req.params.demo,
-        "main.cpp"
+        req.params.demo
       );
+
+      const outPath = Path.join(rootPath, "out", `${req.params.demo}.js`);
 
       console.time(`compile: ${demoPath}`);
 
       try {
-        await buildDirectory(demoPath, "out", ["-O2"], false, true);
+        await buildDirectory(demoPath, outPath, ["-O2"], false, true);
         res.json({ ok: true });
       } catch (err) {
         res.status(500);

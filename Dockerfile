@@ -48,6 +48,10 @@ RUN node build-tools/gen-compile-commands.js > compile_commands.json
 COPY --from=ui-builder /app/clangd_11.0.0 /app/clangd
 COPY --from=ui-builder /app/viewer/js-ui/v2 /app/viewer/js-ui/v2
 
+# prebuild blinky and mqtt
+RUN node cli.js -v -i demos/blinky -o out --compiler-opts -O2
+RUN node cli.js -v -i demos/MQTT -o out --compiler-opts -O2
+
 EXPOSE 7829
 
 CMD ["node", "server.js"]

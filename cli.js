@@ -12,7 +12,6 @@ const opn = require('opn');
 const commandExistsSync = require('command-exists').sync;
 const launchServer = require('./server/launch-server');
 const version = JSON.parse(fs.readFileSync(Path.join(__dirname, 'package.json'), 'utf-8')).version;
-const puppeteer = require('puppeteer');
 const promisify = require('es6-promisify').promisify;
 
 let program = require('commander');
@@ -130,6 +129,8 @@ fn(program.inputDir || program.inputFile, program.outputFile, extraArgs, program
         console.log('Building application succeeded, output file is', program.outputFile);
 
         if (program.launch || program.launchHeadless) {
+            const puppeteer = require('puppeteer');
+            
             let browser;
             try {
                 let port = process.env.PORT || 7900;
