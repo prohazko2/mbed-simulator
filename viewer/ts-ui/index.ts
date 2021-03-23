@@ -22,8 +22,8 @@ const sim = document.querySelector("#viewer iframe") as HTMLIFrameElement;
 const saveButton = document.getElementById("save-demo") as HTMLButtonElement;
 const runButton = document.getElementById("run") as HTMLButtonElement;
 const runStatus = document.getElementById("run-status") as HTMLElement;
-const compileFailed = document.querySelector(
-  "#compilation-failed"
+const compileFailed = document.getElementById(
+  "compilation-failed"
 ) as HTMLElement;
 
 const editor = initEditor(document.getElementById("editor"), { rootPath });
@@ -51,10 +51,7 @@ async function saveCode() {
   commitModel();
 }
 
-addEditorCommand("Ctrl+S", "Save Demo", saveCode);
-saveButton.addEventListener("click", saveCode);
-
-runButton.addEventListener("click", async () => {
+async function runCode() {
   runButton.disabled = true;
   runStatus.textContent = "saving ...";
 
@@ -89,7 +86,13 @@ runButton.addEventListener("click", async () => {
     }
   }
   runButton.disabled = false;
-});
+}
+
+addEditorCommand("Ctrl+S", "Save Demo", saveCode);
+saveButton.addEventListener("click", saveCode);
+
+addEditorCommand("Ctrl+E", "Run Demo", runCode);
+runButton.addEventListener("click", runCode);
 
 select.addEventListener("change", () => loadCode(select.value));
 
