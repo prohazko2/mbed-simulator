@@ -73,6 +73,7 @@ export function initEditor(element: HTMLElement, opts: LspOptions) {
 
   let e: any = editor;
 
+  // TODO: monaco-languageclient fails here, investigate
   if (!e._commandService.addCommand) {
     e._commandService.addCommand = (args: any) => {
       console.log("e._commandService.addCommand", args);
