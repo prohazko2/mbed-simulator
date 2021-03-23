@@ -1,8 +1,19 @@
 # Modded fork of the experimental simulator for Mbed OS 5.11 applications (with `monaco-editor` and `clangd` C++ Language Server)
- - Fix Dockerfile (kinda) (Size warning!: `~4gb` on disk and `~2gb` over wire)
+ - Fix Dockerfile (kinda) (Size warning! `~4gb` on disk and `~2gb` over wire)
  - Replace `Ace Editor` with `Monaco Editor`
  - Add `clangd` C++ Language Server for `Monaco Editor`
  - Demos are saved and compiled in place. Ok for local development, but not suitable for servers and clouds 
+ - Only `blinky` and `mqtt` demos are precompiled. For others you need to hit "run" button before it starts
+
+### Simple run
+ ```bash
+ > docker run -it -p 7829:7829 prohazko/mbed-simulator
+ ```
+
+ ### Provide own demos folder
+ ```bash
+ > docker run -it -p 7829:7829 -v `pwd`/demos:/app/demos prohazko/mbed-simulator
+ ```
 
 # Modded fork of the experimental simulator for Mbed OS 5.11 applications
 
