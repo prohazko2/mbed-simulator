@@ -1,5 +1,4 @@
-# Modded fork of the experimental simulator for Mbed OS 5.11 applications with
-##  (`monaco-editor` and `clangd` C++ Language Server)
+# Modded fork of the experimental simulator for Mbed OS 5.11 applications (with `monaco-editor` and `clangd` C++ Language Server)
  - Fix Dockerfile (kinda) (Size warning! `~4gb` on disk and `~2gb` over wire)
  - Replace `Ace Editor` with `Monaco Editor`
  - Add `clangd` C++ Language Server for `Monaco Editor`
