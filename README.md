@@ -9,6 +9,7 @@
  ```bash
  > docker run -it -p 7829:7829 prohazko/mbed-simulator
  ```
+> Note: Сhanges you make will be saved inside container until restart, unless you: 
 
  ### Provide own demos folder
  ```bash
